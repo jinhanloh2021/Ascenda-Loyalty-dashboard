@@ -1,0 +1,130 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:ap-southeast-1:699089610166:task-definition/frontend-task:1",
+    "containerDefinitions": [
+        {
+            "name": "frontend_app",
+            "image": "699089610166.dkr.ecr.ap-southeast-1.amazonaws.com/301_frontend:d674d8f16e9fb261af7d6cfd6679e646b00c2b8e",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "frontend_app-3000-tcp",
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "secrets": [
+                {
+                    "name": "AWS_ACCESS_KEY_ID",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:aws/cred/301-dsRE3v:AWS_ACCESS_KEY_ID::"
+                },
+                {
+                    "name": "AWS_SECRET_ACCESS_KEY",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:aws/cred/301-dsRE3v:AWS_SECRET_ACCESS_KEY::"
+                },
+                {
+                    "name": "COGNITO_USER_POOL_ID",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:frontend-secrets-cl3zxR:COGNITO_USER_POOL_ID::"
+                },
+                {
+                    "name": "COGNITO_AWS_REGION",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:frontend-secrets-cl3zxR:COGNITO_AWS_REGION::"
+                },
+                {
+                    "name": "COGNITO_CLIENT_ID",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:frontend-secrets-cl3zxR:COGNITO_CLIENT_ID::"
+                },
+                {
+                    "name": "COGNITO_CLIENT_SECRET",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:frontend-secrets-cl3zxR:COGNITO_CLIENT_SECRET::"
+                },
+                {
+                    "name": "COGNITO_ISSUER",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:frontend-secrets-cl3zxR:COGNITO_ISSUER::"
+                },
+                {
+                    "name": "NEXTAUTH_SECRET",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:frontend-secrets-cl3zxR:NEXTAUTH_SECRET::"
+                },
+                {
+                    "name": "NEXTAUTH_URL",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:frontend-secrets-cl3zxR:NEXTAUTH_URL::"
+                },
+                {
+                    "name": "SESSION_COOKIE_NAME",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:frontend-secrets-cl3zxR:SESSION_COOKIE_NAME::"
+                }
+            ],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/frontend-task",
+                    "awslogs-region": "ap-southeast-1",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            }
+        }
+    ],
+    "family": "frontend-task",
+    "taskRoleArn": "arn:aws:iam::699089610166:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::699089610166:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 1,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2023-11-11T14:20:50.119Z",
+    "registeredBy": "arn:aws:iam::699089610166:user/hannah.kim.2020",
+    "tags": []
+}

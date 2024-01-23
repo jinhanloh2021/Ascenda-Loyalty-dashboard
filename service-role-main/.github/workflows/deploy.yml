@@ -1,0 +1,94 @@
+name: Deploy Lambda Functions
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-createRole:
+    runs-on: ubuntu-latest
+    # if: contains(github.event.commits.*.added, 'src/create_role.py') || contains(github.event.commits.*.modified, 'src/create_role.py')
+    steps:
+    - uses: actions/checkout@v3
+    - uses: aws-actions/setup-sam@v2
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: 'ap-southeast-1'
+        audience: sts.amazonaws.com
+    
+    - name: Zip createRole Function
+      run: |
+        cd src
+        zip createRole.zip create_role.py
+    - name: Deploy createRole to Lambda
+      run: aws lambda update-function-code --function-name createRole --zip-file fileb://src/createRole.zip
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'ap-southeast-1'
+  deploy-deleteRole:
+    runs-on: ubuntu-latest
+    # if: contains(github.event.commits.*.added, 'src/delete_role.py') || contains(github.event.commits.*.modified, 'src/delete_role.py')
+    steps:
+    - uses: actions/checkout@v3
+    - name: Zip deleteRole Function
+      run: |
+        cd src
+        zip deleteRole.zip delete_role.py
+    - name: Deploy deleteRole to Lambda
+      run: aws lambda update-function-code --function-name deleteRole --zip-file fileb://src/deleteRole.zip
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'ap-southeast-1'
+
+  deploy-getAllRole:
+    runs-on: ubuntu-latest
+    # if: contains(github.event.commits.*.added, 'src/get_all_role.py') || contains(github.event.commits.*.modified, 'src/get_all_role.py')
+    steps:
+    - uses: actions/checkout@v3
+    - name: Zip getAllRole Function
+      run: |
+        cd src
+        zip getAllRole.zip get_all_role.py
+    - name: Deploy getAllRole to Lambda
+      run: aws lambda update-function-code --function-name getAllRole --zip-file fileb://src/getAllRole.zip
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'ap-southeast-1'
+
+  deploy-getRole:
+    runs-on: ubuntu-latest
+    # if: contains(github.event.commits.*.added, 'src/get_role.py') || contains(github.event.commits.*.modified, 'src/get_role.py')
+    steps:
+    - uses: actions/checkout@v3
+    - name: Zip getRole Function
+      run: |
+        cd src
+        zip getRole.zip get_role.py
+    - name: Deploy getRole to Lambda
+      run: aws lambda update-function-code --function-name getRole --zip-file fileb://src/getRole.zip
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'ap-southeast-1'
+
+  deploy-updateRole:
+    runs-on: ubuntu-latest
+    # if: contains(github.event.commits.*.added, 'src/update_role.py') || contains(github.event.commits.*.modified, 'src/update_role.py')
+    steps:
+    - uses: actions/checkout@v3
+    - name: Zip updateRole Function
+      run: |
+        cd src
+        zip updateRole.zip update_role.py
+    - name: Deploy updateRole to Lambda
+      run: aws lambda update-function-code --function-name updateRole --zip-file fileb://src/updateRole.zip
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'ap-southeast-1'

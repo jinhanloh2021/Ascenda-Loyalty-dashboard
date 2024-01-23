@@ -1,0 +1,13 @@
+com:
+  project:
+    adminproxy:
+      aws:
+        roleAPIGateway: ${ROLE_API_GATEWAY}
+        makerCheckerAPIGateway: ${MAKER_CHECKER_API_GATEWAY}
+        accessKeyId: ${AWS_ACCESS_KEY_ID}
+        secretKey: ${AWS_SECRET_ACCESS_KEY}
+      jwt:
+        signingKey: ${JWT_SIGNING_KEY}
+
+server:
+  port: 8001

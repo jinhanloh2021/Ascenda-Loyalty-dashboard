@@ -1,0 +1,99 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:ap-southeast-1:699089610166:task-definition/user-task:15",
+    "containerDefinitions": [
+        {
+            "name": "user_service_app",
+            "image": "699089610166.dkr.ecr.ap-southeast-1.amazonaws.com/301_user:32cb5492c474550d1ce09169f67ef445d9f16c18",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "user_service_app-8002-tcp",
+                    "containerPort": 8002,
+                    "hostPort": 8002,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "secrets": [
+                {
+                    "name": "AWS_ACCESS_KEY_ID",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:aws/cred/301-dsRE3v:AWS_ACCESS_KEY_ID::"
+                },
+                {
+                    "name": "AWS_SECRET_ACCESS_KEY",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:aws/cred/301-dsRE3v:AWS_SECRET_ACCESS_KEY::"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/user-task",
+                    "awslogs-region": "ap-southeast-1",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            }
+        }
+    ],
+    "family": "user-task",
+    "taskRoleArn": "arn:aws:iam::699089610166:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::699089610166:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 15,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.secrets.asm.environment-variables"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2023-11-10T10:43:55.443Z",
+    "registeredBy": "arn:aws:iam::699089610166:user/hannah.kim.2020",
+    "tags": []
+}

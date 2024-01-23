@@ -1,0 +1,127 @@
+{
+  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-1:699089610166:task-definition/proxy-task:74",
+  "containerDefinitions": [
+    {
+      "name": "proxy_service_app",
+      "image": "699089610166.dkr.ecr.ap-southeast-1.amazonaws.com/301_admin_proxy:4bd6abd95f1603f5c7bc16c8973046c1aaf418a3",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "name": "proxy_service_app-8001-tcp",
+          "containerPort": 8001,
+          "hostPort": 8001,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "secrets": [
+        {
+          "name": "APP_CLIENT_ID",
+          "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:cognito_secrets-TqOHhU:APP_CLIENT_ID::"
+        },
+        {
+          "name": "AWS_ACCESS_KEY_ID",
+          "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:aws/cred/301-dsRE3v:AWS_ACCESS_KEY_ID::"
+        },
+        {
+          "name": "AWS_REGION",
+          "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:cognito_secrets-TqOHhU:AWS_REGION::"
+        },
+        {
+          "name": "AWS_SECRET_ACCESS_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:aws/cred/301-dsRE3v:AWS_SECRET_ACCESS_KEY::"
+        },
+        {
+          "name": "DB_USER_POOL_ID",
+          "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:cognito_secrets-TqOHhU:DB_USER_POOL_ID::"
+        },
+        {
+          "name": "JWK_URL",
+          "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:cognito_secrets-TqOHhU:JWK_URL::"
+        },
+        {
+          "name": "JWT_SIGNING_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:JWT/Secret-C4BQFX:JWT_SIGNING_KEY::"
+        },
+        {
+          "name": "MAKER_CHECKER_API_GATEWAY",
+          "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:makerCheckerAPIGateway-jDk57O:makerCheckerAPIGateway::"
+        },
+        {
+          "name": "ROLE_API_GATEWAY",
+          "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:699089610166:secret:roleAPIGateway-jv8iym:ROLE_API_GATEWAY::"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-create-group": "true",
+          "awslogs-group": "/ecs/proxy-task",
+          "awslogs-region": "ap-southeast-1",
+          "awslogs-stream-prefix": "ecs"
+        },
+        "secretOptions": []
+      }
+    }
+  ],
+  "family": "proxy-task",
+  "taskRoleArn": "arn:aws:iam::699089610166:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::699089610166:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "revision": 74,
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+    {
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "name": "ecs.capability.secrets.asm.environment-variables"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    },
+    {
+      "name": "ecs.capability.task-eni"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+    }
+  ],
+  "placementConstraints": [],
+  "compatibilities": [
+    "EC2",
+    "FARGATE"
+  ],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "1024",
+  "memory": "3072",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "registeredAt": "2023-11-13T14:35:35.167Z",
+  "registeredBy": "arn:aws:iam::699089610166:user/WeiHan301",
+  "tags": []
+}
